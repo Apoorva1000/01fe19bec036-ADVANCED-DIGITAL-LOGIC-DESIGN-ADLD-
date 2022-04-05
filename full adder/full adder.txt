@@ -1,0 +1,46 @@
+// main module 
+module fa(sum,cout,a,b,cin);
+input a,b,cin;
+output sum,cout;
+assign sum=a^b^cin;
+assign cout=(a & b)|(b & cin)|(cin & a);
+endmodule
+
+
+//  testbench
+module fa_tb;
+
+	// Inputs
+	reg a;
+	reg b;
+	reg cin;
+
+	// Outputs
+	wire sum;
+	wire cout;
+
+	// Instantiate the Unit Under Test (UUT)
+	fa uut (
+		.sum(sum), 
+		.cout(cout), 
+		.a(a), 
+		.b(b), 
+		.cin(cin)
+	);
+
+
+initial
+begin
+$monitor($time,"a=%b b=%b cin=%b sum=%b carry=%b",a,b,cin,sum,cout);
+a=0;b=0;cin=0;
+#50 a=0;b=0;cin=0;
+#50 a=0;b=0;cin=1;
+#50 a=0;b=1;cin=0;
+#50 a=0;b=1;cin=1;
+#50 a=1;b=0;cin=0;
+#50 a=1;b=0;cin=1;
+#50 a=1;b=1;cin=0;
+#50 a=1;b=1;cin=1;
+end 
+endmodule
+
