@@ -1,0 +1,39 @@
+// main module 
+
+module andgate(a,b,c);
+input a,b;
+output c;
+assign c=a&b;
+endmodule
+
+// testbench
+
+module andgate_tb;
+
+	// Inputs
+	reg a;
+	reg b;
+
+	// Outputs
+	wire c;
+
+	// Instantiate the Unit Under Test (UUT)
+	andgate uut (
+		.a(a), 
+		.b(b), 
+		.c(c)
+	);
+
+	initial begin
+	$monitor("a=%b b=%b c=%b",a,b,c);
+a=0;b=0;
+#100
+a=0;b=1;
+#100
+a=1;b=0;
+#100
+a=1;b=1;
+#100;
+	end
+      
+endmodule
